@@ -6,71 +6,93 @@
 	<title></title>
 	<style type="text/css">
 		body{
-			padding: 20%;
 			text-align: center;
 			background: url(https://t3.ftcdn.net/jpg/03/73/74/30/360_F_373743064_xJZ91goLoLV4BZCnbECIHjGFvrfo3wFr.jpg),fixed;
 			background-size: cover;
+			}
+		.group{
+			padding: 10%;
 		}
-		#data{
-			
-			
-			padding: 0.8%;
-			border-style: solid;
-			font-style: normal;
-			color: black;
-
-		}
-			
-			
-		#password{
-			
-			padding: 0.8%;
-			border-style: solid;
-			font-style: normal;
-			color: black;
-
 		
+		#data{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+		}
+			#password{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
 		}
 		.btn{
-			
 			padding: 0.8%;
 			border-style: solid;
 			font-style: normal;
 			color: black;
-
 		}
 		.head{
-			margin-top: 20%;
+			color: white;
+			font-style: normal;
+			font-size: 50px;
 		}
+		#course{
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+			width: 15%;
+		}
+		#gender{
+			font-size: 18px;
+			color: white;
+		}
+		.input{
+			font-size: 15px;
+			color: white;
+		}
+		
 	</style>
 </head>
 <body>
 	<h1 class="head"><b>Registration Page</b></h1>
-	<p><input placeholder="Enter data" id="data"/></p>
-	<p><input placeholder="Enter password" id="password"/></p>
-	<p>
+	<div class="group">
+		<p><input placeholder="Enter data" id="data"/></p>
+		<p><input placeholder="Enter password" id="password"/></p>
+		<p>
 			<select id="course">
-				<option value="select course">select course</option>
+				<option value="select course">Select Course</option>
 				<option value="mpc">MPC</option>
 				<option value="mec">MEC</option>
 				<option value="cec">CEC</option>
 			</select>
 		</p>
-	<button class="btn" onclick="user()">submit</button>
-	<script type="text/javascript">
 
-		
+		<p class="input">
+		<input type="radio" value="Male" name="gender" id="gmale" />Male
+		<input type="radio" value="Female" name="gender" id="gfemale" />Female</p>
+
+	<button class="btn" onclick="user()">submit</button>
+	</div>	
+	<script type="text/javascript">
 		function user(){
 			var data=document.getElementById("data").value
 			var password=document.getElementById("password").value
 			var course=document.getElementById("course").value
-			console.log(data,password,course)
+			var gmale=document.getElementById("gmale").checked
+			var gfemale=document.getElementById("gfemale").checked
+			if(gmale==true)var gender="male"
+				else var gender="female"
+
+
+			console.log(data,password,course,gender)
 			fetch("http://localhost:4000/newData",{
 			method:"POST",
 			headers:{
 				"Content-Type":"application/json"
 			},
-			body:JSON.stringify({name:data,password:password,course:course})
+			body:JSON.stringify({name:data,password:password,course:course,gender:gender})
 		})
 			.then((res)=>{
 				console.log(res)
