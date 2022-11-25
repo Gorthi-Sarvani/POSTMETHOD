@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			padding: 20%;
+			text-align: center;
+			background: url(https://t3.ftcdn.net/jpg/03/73/74/30/360_F_373743064_xJZ91goLoLV4BZCnbECIHjGFvrfo3wFr.jpg),fixed;
+			background-size: cover;
+		}
+		#data{
+			
+			
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+
+		}
+			
+			
+		#password{
+			
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+
+		
+		}
+		.btn{
+			
+			padding: 0.8%;
+			border-style: solid;
+			font-style: normal;
+			color: black;
+
+		}
+		.head{
+			margin-top: 20%;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="head"><b>Registration Page</b></h1>
+	<p><input placeholder="Enter data" id="data"/></p>
+	<p><input placeholder="Enter password" id="password"/></p>
+	<p>
+			<select id="course">
+				<option value="select course">select course</option>
+				<option value="mpc">MPC</option>
+				<option value="mec">MEC</option>
+				<option value="cec">CEC</option>
+			</select>
+		</p>
+	<button class="btn" onclick="user()">submit</button>
+	<script type="text/javascript">
+
+		
+		function user(){
+			var data=document.getElementById("data").value
+			var password=document.getElementById("password").value
+			var course=document.getElementById("course").value
+			console.log(data,password,course)
+			fetch("http://localhost:4000/newData",{
+			method:"POST",
+			headers:{
+				"Content-Type":"application/json"
+			},
+			body:JSON.stringify({name:data,password:password,course:course})
+		})
+			.then((res)=>{
+				console.log(res)
+				if(res.status===200)
+					alert("Registration successful")
+			})
+			.catch((err)=>{
+				alert(err)
+			})
+		}
+	</script>
+
+</body>
+</html>
